@@ -1,7 +1,8 @@
 import React from "react";
 import "./MainPage.css";
 import CaloriesCalculator from "../CaloriesCalculator/CaloriesCalculator";
-import EasyFit from "../imagen/EasyFit.png"
+import EasyFit from "../imagen/EasyFit.png";
+import SearchBar from "../SearchBar/SearchBar";
 function MainPage() {
   return (
     <div>
@@ -11,6 +12,7 @@ function MainPage() {
       </div>
       <div>
         <CaloriesCalculator />
+        <SearchBar />
       </div>
     </div>
   );

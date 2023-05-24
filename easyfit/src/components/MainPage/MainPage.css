@@ -1,14 +1,13 @@
-* {
+/* * {
   background-color: black;
   color: white;
  
-}
+} */
 
-.EasyFit{
+.EasyFit {
   display: flex;
   align-items: center;
 }
-.EasyFit img{
+.EasyFit img {
   margin-left: 70%;
-  
 }

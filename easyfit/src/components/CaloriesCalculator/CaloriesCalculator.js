@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./CaloriesCalculator.css";
 function CaloriesCalculator() {
   //UseState para el Form
-  const [GenderValue, SetGenderValue] = useState("")
-  const [AgeValue, SetAgeValue] = useState("")
-  const [HeightValue, SetHeightValue] = useState("")
-  const [WeightValue, SetWeightValue] = useState("")
-  const [ExerciseValue, SetExerciseValue] = useState("")
+  const [GenderValue, SetGenderValue] = useState("");
+  const [AgeValue, SetAgeValue] = useState("");
+  const [HeightValue, SetHeightValue] = useState("");
+  const [WeightValue, SetWeightValue] = useState("");
+  const [ExerciseValue, SetExerciseValue] = useState("");
 
   //UseSatate para calorias y mensaje
   const [CalcoriesCalculate, SetCalcoriesCalculate] = useState();
@@ -22,9 +22,11 @@ function CaloriesCalculator() {
   });
   const CaloriesCalculateHandler = () => {
     const Gendervalid = GenderValue !== "";
-    const Agevalid = AgeValue !== "" && AgeValue >= 0 && AgeValue <= 90
-    const Heightvalid = HeightValue !== "" && HeightValue >=  50 && HeightValue <= 200
-    const Weightvalid = WeightValue !== "" && WeightValue >=  30 && WeightValue <= 400
+    const Agevalid = AgeValue !== "" && AgeValue > 0 && AgeValue <= 90;
+    const Heightvalid =
+      HeightValue !== "" && HeightValue >= 50 && HeightValue <= 200;
+    const Weightvalid =
+      WeightValue !== "" && WeightValue >= 30 && WeightValue <= 400;
     const Exercisevalid = ExerciseValue !== "";
 
     SetValidations({
@@ -32,35 +34,57 @@ function CaloriesCalculator() {
       age: !Agevalid,
       height: !Heightvalid,
       weight: !Weightvalid,
-      exercise: !Exercisevalid
-    })
-    if (Gendervalid && Agevalid && Heightvalid && WeightValue && Exercisevalid) {
+      exercise: !Exercisevalid,
+    });
+    if (
+      Gendervalid &&
+      Agevalid &&
+      Heightvalid &&
+      WeightValue &&
+      Exercisevalid
+    ) {
       //Calculadora:
       //Calcula las calorias segun hombre o mujer
-      const Calories = GenderValue === "Male" ? 66 + ((13.7 * WeightValue) + (5 * HeightValue) - (6.8 * AgeValue)) : GenderValue === "Female" ? 655 + ((9.6 * WeightValue) + (1.8 * HeightValue) - (4.7 * AgeValue)) : null;
+      const Calories =
+        GenderValue === "Male"
+          ? 66 + (13.7 * WeightValue + 5 * HeightValue - 6.8 * AgeValue)
+          : GenderValue === "Female"
+          ? 655 + (9.6 * WeightValue + 1.8 * HeightValue - 4.7 * AgeValue)
+          : null;
 
       //Calcula las calorias segun la actividad fisica
       const ExerciseCalories =
-        ExerciseValue === 'no exercise' ? 1.2 :
-          ExerciseValue === 'little exercise' ? 1.375 :
-            ExerciseValue === 'moderate exercise' ? 1.55 :
-              ExerciseValue === 'high exercise' ? 1.75 :
-                1.2;
+        ExerciseValue === "no exercise"
+          ? 1.2
+          : ExerciseValue === "little exercise"
+          ? 1.375
+          : ExerciseValue === "moderate exercise"
+          ? 1.55
+          : ExerciseValue === "high exercise"
+          ? 1.75
+          : 1.2;
 
       //Setea las calorias y la impresion del mensaje
       SetCalcoriesCalculate(Math.round(Calories * ExerciseCalories));
       SetShowMensage(true);
-    }else{
+    } else {
       SetShowMensage(false);
     }
-    }
+  };
   return (
     <div>
       <form>
         <div>
           <label>gender:</label>
-          <select value={GenderValue} onChange={(event) => { SetGenderValue(event.target.value) }}>
-            <option value="" disabled >Select your gender</option>
+          <select
+            value={GenderValue}
+            onChange={(event) => {
+              SetGenderValue(event.target.value);
+            }}
+          >
+            <option value="" disabled>
+              Select your gender
+            </option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
@@ -69,42 +93,80 @@ function CaloriesCalculator() {
         </div>
         <div>
           <label>Age:</label>
-          <input type="number" min="1" max="90" onChange={(event) => { SetAgeValue(event.target.value) }}></input>
+          <input
+            type="number"
+            min="1"
+            max="90"
+            onChange={(event) => {
+              SetAgeValue(event.target.value);
+            }}
+          ></input>
           {Validations.age && <p>error you must enter your age real</p>}
         </div>
         <div>
           <label>Height (cm):</label>
-          <input type="number" min="50" max="200" onChange={(event) => { SetHeightValue(event.target.value) }}></input>
-          {Validations.height && <p>error you must enter your height  real</p>}
+          <input
+            type="number"
+            min="50"
+            max="200"
+            onChange={(event) => {
+              SetHeightValue(event.target.value);
+            }}
+          ></input>
+          {Validations.height && <p>error you must enter your height real</p>}
         </div>
         <div>
           <label>weight (kg):</label>
-          <input type="number" min="30" max="400" onChange={(event) => { SetWeightValue(event.target.value) }}></input>
-          {Validations.weight && <p>error you must enter your weight  real</p>}
+          <input
+            type="number"
+            min="30"
+            max="400"
+            onChange={(event) => {
+              SetWeightValue(event.target.value);
+            }}
+          ></input>
+          {Validations.weight && <p>error you must enter your weight real</p>}
         </div>
         <div>
           <label>How active are you daily?:</label>
-          <select value={ExerciseValue} onChange={(event) => { SetExerciseValue(event.target.value) }}>
-            <option value="" disabled>Select an option</option>
-            <option value="no exercise">no exercise(no type of exercise)</option>
-            <option value="little exercise">little exercise(1 or 3 days a week)</option>
-            <option value="moderate exercise">moderate exercise(3 or 5 days a week)</option>
-            <option value="intense exercise">intense exercise(6 or 7 days a week)</option>
+          <select
+            value={ExerciseValue}
+            onChange={(event) => {
+              SetExerciseValue(event.target.value);
+            }}
+          >
+            <option value="" disabled>
+              Select an option
+            </option>
+            <option value="no exercise">
+              no exercise(no type of exercise)
+            </option>
+            <option value="little exercise">
+              little exercise(1 or 3 days a week)
+            </option>
+            <option value="moderate exercise">
+              moderate exercise(3 or 5 days a week)
+            </option>
+            <option value="intense exercise">
+              intense exercise(6 or 7 days a week)
+            </option>
           </select>
           {Validations.exercise && <p>error you must enter your routine</p>}
         </div>
-
       </form>
       <div>
         <button onClick={CaloriesCalculateHandler}>Enviar</button>
       </div>
 
-      {ShowMensage && <h3>Calorias para bajar de peso: {CalcoriesCalculate - 100}</h3>}
-      {ShowMensage && <h3>Calorias para Mantener peso: {CalcoriesCalculate}</h3>}
-      {ShowMensage && <h3>Calorias para Subir de peso: {CalcoriesCalculate + 100}</h3>}
-
-
-
+      {ShowMensage && (
+        <h3>Calorias para bajar de peso: {CalcoriesCalculate - 100}</h3>
+      )}
+      {ShowMensage && (
+        <h3>Calorias para Mantener peso: {CalcoriesCalculate}</h3>
+      )}
+      {ShowMensage && (
+        <h3>Calorias para Subir de peso: {CalcoriesCalculate + 100}</h3>
+      )}
     </div>
   );
 }
