@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+
 import "./CaloriesCalculator.css";
+import React, { useEffect, useState } from "react";
+import UseValidation from "../CustomHook/UseCustomHook";
+
 function CaloriesCalculator() {
+  
   //UseState para el Form
   const [GenderValue, SetGenderValue] = useState("");
   const [AgeValue, SetAgeValue] = useState("");
@@ -12,37 +16,21 @@ function CaloriesCalculator() {
   const [CalcoriesCalculate, SetCalcoriesCalculate] = useState();
   const [ShowMensage, SetShowMensage] = useState(false);
 
-  //UseState de Validacion
-  const [Validations, SetValidations] = useState({
-    gender: false,
-    age: false,
-    height: false,
-    weight: false,
-    exercise: false,
-  });
-  const CaloriesCalculateHandler = () => {
-    const Gendervalid = GenderValue !== "";
-    const Agevalid = AgeValue !== "" && AgeValue > 0 && AgeValue <= 90;
-    const Heightvalid =
-      HeightValue !== "" && HeightValue >= 50 && HeightValue <= 200;
-    const Weightvalid =
-      WeightValue !== "" && WeightValue >= 30 && WeightValue <= 400;
-    const Exercisevalid = ExerciseValue !== "";
+  //Validacion
+    const Validations = UseValidation(GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValue);
 
-    SetValidations({
-      gender: !Gendervalid,
-      age: !Agevalid,
-      height: !Heightvalid,
-      weight: !Weightvalid,
-      exercise: !Exercisevalid,
-    });
+
+  //Boton Enviar
+  const CaloriesCalculateHandler = () => {
+   
     if (
-      Gendervalid &&
-      Agevalid &&
-      Heightvalid &&
-      WeightValue &&
-      Exercisevalid
+      Validations.gender &&
+      Validations.age &&
+      Validations.height &&
+      Validations.weight &&
+      Validations.exercise
     ) {
+    
       //Calculadora:
       //Calcula las calorias segun hombre o mujer
       const Calories =
@@ -71,9 +59,11 @@ function CaloriesCalculator() {
       SetShowMensage(false);
     }
   };
+  
   return (
     <div>
       <form>
+        {/* Genero */}
         <div>
           <label>gender:</label>
           <select
@@ -89,8 +79,11 @@ function CaloriesCalculator() {
             <option value="Female">Female</option>
           </select>
 
-          {Validations.gender && <p>error you must choose a gender</p>}
+          {!Validations.gender && <p>error you must choose a gender</p>}
+
         </div>
+
+             {/* Edad */}
         <div>
           <label>Age:</label>
           <input
@@ -101,8 +94,9 @@ function CaloriesCalculator() {
               SetAgeValue(event.target.value);
             }}
           ></input>
-          {Validations.age && <p>error you must enter your age real</p>}
+          {!Validations.age && <p>error you must enter your age real</p>}
         </div>
+         {/* Altura */}
         <div>
           <label>Height (cm):</label>
           <input
@@ -113,10 +107,12 @@ function CaloriesCalculator() {
               SetHeightValue(event.target.value);
             }}
           ></input>
-          {Validations.height && <p>error you must enter your height real</p>}
+          {!Validations.height && <p>error you must enter your height real</p>}
         </div>
+
+         {/* Peso*/}
         <div>
-          <label>weight (kg):</label>
+          <label>Weight (kg):</label>
           <input
             type="number"
             min="30"
@@ -125,8 +121,9 @@ function CaloriesCalculator() {
               SetWeightValue(event.target.value);
             }}
           ></input>
-          {Validations.weight && <p>error you must enter your weight real</p>}
+          {!Validations.weight && <p>error you must enter your weight real</p>}
         </div>
+        {/* Actividad Fisica*/}
         <div>
           <label>How active are you daily?:</label>
           <select
@@ -151,7 +148,7 @@ function CaloriesCalculator() {
               intense exercise(6 or 7 days a week)
             </option>
           </select>
-          {Validations.exercise && <p>error you must enter your routine</p>}
+          {!Validations.exercise && <p>error you must enter your routine</p>}
         </div>
       </form>
       <div>
@@ -167,6 +164,7 @@ function CaloriesCalculator() {
       {ShowMensage && (
         <h3>Calorias para Subir de peso: {CalcoriesCalculate + 100}</h3>
       )}
+      
     </div>
   );
 }

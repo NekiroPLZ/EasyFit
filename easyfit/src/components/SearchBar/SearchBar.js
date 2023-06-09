@@ -8,6 +8,10 @@ const SearchBar = () => {
   };
   //a9f856d3e5f24396aace208d8bb6548c
   //https://api.spoonacular.com/mealplanner/generate?apiKey=a9f856d3e5f24396aace208d8bb6548c&timeFrame=day
+
+
+
+  //0501cb1238d4432ba7f21055501eee80
   const url =
     "https://api.spoonacular.com/food/menuItems/search?apiKey=a9f856d3e5f24396aace208d8bb6548c&query=" +
     inputSearch;
@@ -16,9 +20,9 @@ const SearchBar = () => {
       .then((response) => response.json())
       .then((data) => setResult(data.menuItems));
   };
-  console.log(result);
+  console.log("APi:",result);
   return (
-    <div>
+    <div> 
       SearchBar
       <div>
         <h2>Search</h2>
