@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const SearchBar = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -6,16 +6,28 @@ const SearchBar = () => {
   const inputSearchHandler = (event) => {
     setInputSearch(event.target.value);
   };
-  //a9f856d3e5f24396aace208d8bb6548c
-  //https://api.spoonacular.com/mealplanner/generate?apiKey=a9f856d3e5f24396aace208d8bb6548c&timeFrame=day
-  const url =
-    "https://api.spoonacular.com/food/menuItems/search?apiKey=a9f856d3e5f24396aace208d8bb6548c&query=" +
-    inputSearch;
-  const buttonHandler = () => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setResult(data.menuItems));
+
+  const url = `https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser?ingr=${inputSearch}&nutrition-type=cooking`;
+
+  const getFoodCalories = async () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "731bb71b23msh21c235d3c646963p131fa4jsn2a871c777f8a",
+        "X-RapidAPI-Host": "edamam-food-and-grocery-database.p.rapidapi.com",
+      },
+    };
+    try {
+      const response = await fetch(url, options);
+      const results = await response.json();
+      setResult([results.hints[0].food.nutrients.ENERC_KCAL]);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  useEffect(() => {
+    getFoodCalories();
+  }, [inputSearch]);
   console.log(result);
   return (
     <div>
@@ -28,14 +40,11 @@ const SearchBar = () => {
           onChange={inputSearchHandler}
           placeholder="SEARCH FOOD..."
         ></input>
-        <button type="button" onClick={buttonHandler}>
-          TYOUCHASD
-        </button>
 
-        {result.map((e, i) => {
+        {result.map((food, index) => {
           return (
-            <div key={i}>
-              <h2>{e.title}</h2>
+            <div key={index}>
+              <h2>{`${inputSearch} has ${food} Calories.`}</h2>
             </div>
           );
         })}
