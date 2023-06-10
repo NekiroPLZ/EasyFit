@@ -6,7 +6,6 @@ const SearchBar = () => {
   const inputSearchHandler = (event) => {
     setInputSearch(event.target.value);
   };
-
   const url = `https://edamam-food-and-grocery-database.p.rapidapi.com/api/food-database/v2/parser?ingr=${inputSearch}&nutrition-type=cooking`;
 
   const getFoodCalories = async () => {
