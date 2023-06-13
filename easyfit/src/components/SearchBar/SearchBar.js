@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 const SearchBar = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [result, setResult] = useState([]);
+
+  const [showMessage, setShowMessage] = useState(false);
   const inputSearchHandler = (event) => {
     setInputSearch(event.target.value);
   };
@@ -19,7 +21,13 @@ const SearchBar = () => {
     try {
       const response = await fetch(url, options);
       const results = await response.json();
-      setResult([results.hints[0].food.nutrients.ENERC_KCAL]);
+      if (results.hints[0].food.nutrients.ENERC_KCAL === 717) {
+        setResult([0]);
+        setShowMessage();
+      } else {
+        setShowMessage(true);
+        setResult([Math.round([results.hints[0].food.nutrients.ENERC_KCAL])]);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -39,14 +47,14 @@ const SearchBar = () => {
           onChange={inputSearchHandler}
           placeholder="SEARCH FOOD..."
         ></input>
-
-        {result.map((food, index) => {
-          return (
-            <div key={index}>
-              <h2>{`${inputSearch} has ${food} Calories.`}</h2>
-            </div>
-          );
-        })}
+        {showMessage &&
+          result.map((food, index) => {
+            return (
+              <div key={index}>
+                <h2>{`${inputSearch} has ${food} Calories.`}</h2>
+              </div>
+            );
+          })}
       </div>
     </div>
   );

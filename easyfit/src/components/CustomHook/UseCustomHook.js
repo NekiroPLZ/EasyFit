@@ -1,8 +1,12 @@
-
-
 import React, { useEffect, useState } from "react";
 
-const UseValidation = (GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValue) => {
+const UseValidation = (
+  GenderValue,
+  AgeValue,
+  HeightValue,
+  WeightValue,
+  ExerciseValue
+) => {
   const [Validations, SetValidations] = useState({
     gender: false,
     age: false,
@@ -11,9 +15,8 @@ const UseValidation = (GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValu
     exercise: false,
   });
 
-  useEffect(()=>{
-    
-    const Gendervalid = GenderValue  != "";
+  useEffect(() => {
+    const Gendervalid = GenderValue !== "";
     const Agevalid = AgeValue !== "" && AgeValue > 0 && AgeValue <= 90;
     const Heightvalid =
       HeightValue !== "" && HeightValue >= 50 && HeightValue <= 200;
@@ -27,15 +30,10 @@ const UseValidation = (GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValu
       height: Heightvalid,
       weight: Weightvalid,
       exercise: Exercisevalid,
-    })
+    });
+  }, [GenderValue, AgeValue, HeightValue, WeightValue, ExerciseValue]);
 
-  },[GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValue])
+  return Validations;
+};
 
-  
-
-  return (
-    Validations
-  )
-}
-
-export default UseValidation
+export default UseValidation;

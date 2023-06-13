@@ -1,10 +1,8 @@
-
 import "./CaloriesCalculator.css";
 import React, { useEffect, useState } from "react";
 import UseValidation from "../CustomHook/UseCustomHook";
 
 function CaloriesCalculator() {
-  
   //UseState para el Form
   const [GenderValue, SetGenderValue] = useState("");
   const [AgeValue, SetAgeValue] = useState("");
@@ -17,12 +15,16 @@ function CaloriesCalculator() {
   const [ShowMensage, SetShowMensage] = useState(false);
 
   //Validacion
-    const Validations = UseValidation(GenderValue,AgeValue,HeightValue,WeightValue,ExerciseValue);
 
-
+  const Validations = UseValidation(
+    GenderValue,
+    AgeValue,
+    HeightValue,
+    WeightValue,
+    ExerciseValue
+  );
   //Boton Enviar
   const CaloriesCalculateHandler = () => {
-   
     if (
       Validations.gender &&
       Validations.age &&
@@ -30,7 +32,6 @@ function CaloriesCalculator() {
       Validations.weight &&
       Validations.exercise
     ) {
-    
       //Calculadora:
       //Calcula las calorias segun hombre o mujer
       const Calories =
@@ -59,7 +60,7 @@ function CaloriesCalculator() {
       SetShowMensage(false);
     }
   };
-  
+
   return (
     <div>
       <form>
@@ -80,10 +81,9 @@ function CaloriesCalculator() {
           </select>
 
           {!Validations.gender && <p>error you must choose a gender</p>}
-
         </div>
 
-             {/* Edad */}
+        {/* Edad */}
         <div>
           <label>Age:</label>
           <input
@@ -96,7 +96,7 @@ function CaloriesCalculator() {
           ></input>
           {!Validations.age && <p>error you must enter your age real</p>}
         </div>
-         {/* Altura */}
+        {/* Altura */}
         <div>
           <label>Height (cm):</label>
           <input
@@ -110,7 +110,7 @@ function CaloriesCalculator() {
           {!Validations.height && <p>error you must enter your height real</p>}
         </div>
 
-         {/* Peso*/}
+        {/* Peso*/}
         <div>
           <label>Weight (kg):</label>
           <input
@@ -164,7 +164,6 @@ function CaloriesCalculator() {
       {ShowMensage && (
         <h3>Calorias para Subir de peso: {CalcoriesCalculate + 100}</h3>
       )}
-      
     </div>
   );
 }
