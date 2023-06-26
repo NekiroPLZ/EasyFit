@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { Suspense, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
 import Sign_in from './components/Login/Sign_in';
+import Sign_up from './components/Login/Sign_up';
+
+import { FirebaseAppProvider } from 'reactfire'
+import fireBaseConfig from './firebase-config';
+
 //Ruteo
-const router = createBrowserRouter([
+
+const router = createBrowserRouter(
+  [
   {
     path: "/",
     element: <> <App /></>,
@@ -14,15 +23,21 @@ const router = createBrowserRouter([
   },
   {
     path: "/Sing_in",
-    element : <div><Sign_in /> </div>
+    element: <div><Sign_in /> </div>
+  },
+  {
+    path: "/Sing_up",
+    element: <div><Sign_up /> </div>
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    
-   <RouterProvider  router={router}/>
-  </React.StrictMode>
+
+
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

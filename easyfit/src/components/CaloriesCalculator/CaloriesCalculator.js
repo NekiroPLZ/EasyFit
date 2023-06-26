@@ -14,6 +14,9 @@ function CaloriesCalculator() {
   const [CalcoriesCalculate, SetCalcoriesCalculate] = useState();
   const [ShowMensage, SetShowMensage] = useState(false);
 
+  const [ShowError,SetShowError] = useState()
+
+  useEffect(()=>{SetShowError(0)},[]);
   //Validacion
 
   const Validations = UseValidation(
@@ -23,8 +26,11 @@ function CaloriesCalculator() {
     WeightValue,
     ExerciseValue
   );
+ 
+
   //Boton Enviar
   const CaloriesCalculateHandler = () => {
+    SetShowError(1);
     if (
       Validations.gender &&
       Validations.age &&
@@ -80,7 +86,7 @@ function CaloriesCalculator() {
             <option value="Female">Female</option>
           </select>
 
-          {!Validations.gender && <p>error you must choose a gender</p>}
+          {!Validations.gender && ShowError === 1 && <p>error you must choose a gender</p>}
         </div>
 
         {/* Edad */}
@@ -94,7 +100,7 @@ function CaloriesCalculator() {
               SetAgeValue(event.target.value);
             }}
           ></input>
-          {!Validations.age && <p>error you must enter your age real</p>}
+          {!Validations.age && ShowError === 1 && <p>error you must enter your age real</p>}
         </div>
         {/* Altura */}
         <div>
@@ -107,7 +113,7 @@ function CaloriesCalculator() {
               SetHeightValue(event.target.value);
             }}
           ></input>
-          {!Validations.height && <p>error you must enter your height real</p>}
+          {!Validations.height && ShowError === 1 && <p>error you must enter your height real</p>}
         </div>
 
         {/* Peso*/}
@@ -121,7 +127,7 @@ function CaloriesCalculator() {
               SetWeightValue(event.target.value);
             }}
           ></input>
-          {!Validations.weight && <p>error you must enter your weight real</p>}
+          {!Validations.weight &&  ShowError === 1 &&<p>error you must enter your weight real</p>}
         </div>
         {/* Actividad Fisica*/}
         <div>
@@ -148,7 +154,7 @@ function CaloriesCalculator() {
               intense exercise(6 or 7 days a week)
             </option>
           </select>
-          {!Validations.exercise && <p>error you must enter your routine</p>}
+          {!Validations.exercise &&  ShowError === 1 &&<p>error you must enter your routine</p>}
         </div>
       </form>
       <div>
