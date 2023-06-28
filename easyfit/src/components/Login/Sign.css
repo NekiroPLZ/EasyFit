@@ -1,21 +1,8 @@
-.Sign{
-    display: flex;
-    align-items: center;
-   /*  background: linear-gradient(to right, #3fa5e5, rgb(12, 178, 215) );
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;  */
+.image {
+  width: 100%;
+  height: 900px;
 }
-.Sign a{
-    margin-left: 76%;
-    margin-right: 60px;
-    color:black;
- 
-}
-.Sign img{
-    margin-bottom: -30px;
-}
-
-.icon {
-  margin-left: -24px;
-  
+.styles-border img {
+  border-radius: 1%;
+  border-style: solid;
 }

@@ -32,13 +32,13 @@ const SearchBar = () => {
       console.error(error);
     }
   };
-  useEffect(() => {
-    getFoodCalories();
-  }, [inputSearch]);
+  console.log(result);
+  // useEffect(() => {
+  //   getFoodCalories();
+  // }, []);
   console.log(result);
   return (
     <div>
-      SearchBar
       <div>
         <h2>Search</h2>
         <input
@@ -47,6 +47,9 @@ const SearchBar = () => {
           onChange={inputSearchHandler}
           placeholder="SEARCH FOOD..."
         ></input>
+        <button type="button" onClick={getFoodCalories}>
+          GET FOOD
+        </button>
         {showMessage &&
           result.map((food, index) => {
             return (
