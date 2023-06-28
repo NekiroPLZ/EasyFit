@@ -14,17 +14,11 @@ function CaloriesCalculator() {
   const [CalcoriesCalculate, SetCalcoriesCalculate] = useState();
   const [ShowMensage, SetShowMensage] = useState(false);
 
-<<<<<<< HEAD
   const [ShowError, SetShowError] = useState();
 
   useEffect(() => {
     SetShowError(0);
   }, []);
-=======
-  const [ShowError,SetShowError] = useState()
-
-  useEffect(()=>{SetShowError(0)},[]);
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
   //Validacion
 
   const Validations = UseValidation(
@@ -34,10 +28,6 @@ function CaloriesCalculator() {
     WeightValue,
     ExerciseValue
   );
-<<<<<<< HEAD
-=======
- 
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
 
   //Boton Enviar
   const CaloriesCalculateHandler = () => {
@@ -97,13 +87,9 @@ function CaloriesCalculator() {
             <option value="Female">Female</option>
           </select>
 
-<<<<<<< HEAD
           {!Validations.gender && ShowError === 1 && (
             <p>error you must choose a gender</p>
           )}
-=======
-          {!Validations.gender && ShowError === 1 && <p>error you must choose a gender</p>}
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
         </div>
 
         {/* Edad */}
@@ -117,13 +103,9 @@ function CaloriesCalculator() {
               SetAgeValue(event.target.value);
             }}
           ></input>
-<<<<<<< HEAD
           {!Validations.age && ShowError === 1 && (
             <p>error you must enter your age real</p>
           )}
-=======
-          {!Validations.age && ShowError === 1 && <p>error you must enter your age real</p>}
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
         </div>
         {/* Altura */}
         <div>
@@ -136,13 +118,9 @@ function CaloriesCalculator() {
               SetHeightValue(event.target.value);
             }}
           ></input>
-<<<<<<< HEAD
           {!Validations.height && ShowError === 1 && (
             <p>error you must enter your height real</p>
           )}
-=======
-          {!Validations.height && ShowError === 1 && <p>error you must enter your height real</p>}
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
         </div>
 
         {/* Peso*/}
@@ -156,13 +134,9 @@ function CaloriesCalculator() {
               SetWeightValue(event.target.value);
             }}
           ></input>
-<<<<<<< HEAD
           {!Validations.weight && ShowError === 1 && (
             <p>error you must enter your weight real</p>
           )}
-=======
-          {!Validations.weight &&  ShowError === 1 &&<p>error you must enter your weight real</p>}
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
         </div>
         {/* Actividad Fisica*/}
         <div>
@@ -189,13 +163,9 @@ function CaloriesCalculator() {
               intense exercise(6 or 7 days a week)
             </option>
           </select>
-<<<<<<< HEAD
           {!Validations.exercise && ShowError === 1 && (
             <p>error you must enter your routine</p>
           )}
-=======
-          {!Validations.exercise &&  ShowError === 1 &&<p>error you must enter your routine</p>}
->>>>>>> ab5b23cc4f8a7917a99dd5240c14ba08fa176e9f
         </div>
       </form>
       <div>
